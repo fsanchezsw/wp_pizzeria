@@ -1,0 +1,455 @@
+/*
+Theme Name: La Pizzeria
+Theme URI:
+Author: Francisco Sánchez Rueda
+Author URI:
+Description: Theme para sitio web de restaurants o pizzas
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: restaurant, mobile first, responsive, pizza
+Text Domain: lapizzeria
+*/
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.site-header {
+  border-bottom: 1px solid #c1c1c1;
+  padding-bottom: 30px;
+  padding-top: 10px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo a img {
+  width: 250px;
+}
+
+/* SOCIAL MENU */
+.socials ul {
+  text-align: center;
+  list-style: none;
+  padding: 0;
+}
+
+.socials ul li {
+  position: relative;
+  display: inline-block;
+}
+
+.socials ul li a:before {
+  font-family: 'FontAwesome';
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 5px;
+  content: '\f08e';
+  font-size: 30px;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sr-text {
+  display: none;
+}
+
+.socials li a[href*="facebook"]::before {
+  content: '\f09a';
+}
+
+.socials li a[href*="twitter"]::before {
+  content: '\f099';
+}
+
+.socials li a[href*="pinterest"]::before {
+  content: '\f231';
+}
+
+.socials li a[href*="youtube"]::before {
+  content: '\f16a';
+}
+
+.socials li a[href*="instagram"]::before {
+  content: '\f16d';
+}
+
+.address {
+  display: block;
+  clear: both;
+  padding-top: 10px;
+}
+
+.address p {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* SITE MENU */
+.site-menu {
+  display: none;
+}
+
+.site-menu ul {
+  list-style: none;
+  display: table;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.site-menu ul li a {
+  text-align: center;
+  padding: 20px 0;
+  display: block;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+
+.site-menu ul li.current_page_item a {
+  border-bottom: 8px solid #a61206;
+}
+
+.site-menu ul li:hover {
+  background-color: #f19f30;
+}
+
+/* SITE CONTENT */
+.principal {
+  padding: 60px;
+  background-color: white;
+  position: relative;
+}
+
+.page-content p {
+  font-size: 18px;
+  line-height: 40px;
+}
+
+.hero {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 450px;
+  text-align: center;
+  margin: 0 auto;
+  display: table;
+  position: relative;
+}
+
+.hero::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero .hero-content {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  position: relative;
+  width: 100vw;
+  z-index: 2;
+  padding-bottom: 80px;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 30px;
+  padding: 30px 0;
+  border-top: 1px solid #c1c1c1;
+  text-align: center;
+}
+
+footer nav ul {
+  list-style: none;
+}
+
+footer nav ul li {
+  display: inline;
+}
+
+footer nav ul li:last-child .separator {
+  display: none;
+}
+
+footer nav ul li a {
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+footer .location {
+  margin-top: 30px;
+}
+
+footer p {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}
+
+footer .copyright {
+  margin-top: 20px;
+}
+
+/* BOXES PAGE-NOSOTROS */
+.boxes-info {
+  display: grid;
+}
+
+.boxes-info .box {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  color: white;
+  text-align: center;
+}
+
+.boxes-info .box:first-child {
+  background-color: #f19f30;
+}
+
+.boxes-info .box:nth-child(2) {
+  background-color: #127427;
+}
+
+.boxes-info .box:last-child {
+  background-color: #a61206;
+}
+
+.box-content {
+  margin: 10px;
+  display: grid;
+  grid-template-rows: 20% 20% 40% 20%;
+  grid-template-areas:  "."
+                        "top"
+                        "text"
+                        ".";
+}
+
+.box-content h3 {
+  grid-area: top;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 5px 0;
+}
+
+.box-content p {
+  grid-area: text;
+}
+
+.box-content > * {
+  align-self: center;
+}
+
+/* SPECIALITIES PAGE-ESPECIALIDADES*/
+.specialities {
+  padding: 0 60px;
+}
+
+div.speciality-text {
+  padding: 20px;
+}
+
+div.speciality-text h4 {
+  border-bottom: 1px solid #dfdfdd;
+  padding-bottom: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+div.speciality-text h4 span {
+  float: right;
+  color: #f19f30;
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+div.speciality-text p {
+  color: #3d3d3d;
+  line-height: 30px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .logo {
+    text-align: left;
+  }
+
+  /* HEADER */
+  .site-header .container {
+    position: relative;
+  }
+
+  .header-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .address p {
+    text-align: right;
+  }
+
+  /* SOCIAL MENU */
+  .socials ul {
+    float: right;
+  }
+
+  /* SITE MENU */
+  .site-menu {
+    display: block;
+  }
+
+  .site-menu ul li {
+    display: table-cell;
+    width: 1%;
+  }
+
+  /* RESPONSIVE SITE MENU */
+  .mobile-menu a {
+    display: none;
+  }
+
+  /* SITE CONTENT */
+  .principal {
+    margin-top: -90px;
+  }
+
+  .hero-text {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  /* GRID */
+  .grid-container {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .grid-container::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  [class*="columns"] {
+    padding: 0 10px;
+    float: left;
+  }
+
+  .columns1-2 {
+    width: 50%;
+  }
+
+  .columns2-3 {
+    width: 66.6%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .logo {
+    text-align: center;
+  }
+
+  /* SITE CONTENT */
+  .hero-text {
+    width: 60%;
+  }
+
+  /* BOXES PAGE-NOSOTROS */
+  .boxes-info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .boxes-info .box {
+    grid-template-columns: unset;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .boxes-info .box:nth-child(2) img {
+    order: 2;
+  }
+
+  .boxes-info .box:nth-child(2) .box-content {
+    order: 1;
+  }
+
+  .box-content {
+    grid-template-rows: 20% 30% 30% 20%;
+  }
+
+  .box p {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* RESPONSIVE SITE MENU */
+  .mobile-menu a {
+    height: 40px;
+    background-color: #a61206;
+    width: 100%;
+    color: white !important;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+}
