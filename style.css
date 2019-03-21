@@ -94,7 +94,7 @@ img {
   -webkit-font-smoothing: antialiased;
 }
 
-.sr-text {
+.sr-text, .screen-reader-text {
   display: none;
 }
 
@@ -153,7 +153,8 @@ img {
   color: black;
 }
 
-.site-menu ul li.current_page_item a {
+.site-menu ul li.current_page_item a,
+.site-menu ul li.current_page_parent a {
   border-bottom: 8px solid #a61206;
 }
 
@@ -324,6 +325,258 @@ div.speciality-text p {
   line-height: 30px;
 }
 
+/* BLOG */
+.blog-entry img {
+  margin-top: 30px;
+}
+
+.entry-info {
+  margin-top: 20px;
+}
+
+.entry-info .date {
+  background-color: #f19f30;
+  float: left;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  padding-top: 5px;
+  margin-right: 20px;
+}
+
+.entry-info .date time {
+  font-size: 30px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+
+.entry-info .date time span {
+  font-size: 16px;
+  display: block;
+  clear: both;
+  text-transform: uppercase;
+}
+
+.entry-info {
+  width: calc(100% - 90px);
+}
+
+.entry-info h2 {
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 24px;
+}
+
+.entry-info .author {
+  text-transform: uppercase;
+  color: #505050;
+  margin-top: 5px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.author i {
+  font-size: 30px;
+  color: #f19f30;
+}
+
+.entry-content p {
+  margin-bottom: 0;
+  line-height: 24px;
+}
+
+.readmore-button,
+.comments form input[type='submit'] {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  width: auto;
+  border-radius: 8px;
+  color: white;
+  padding: 15px 80px;
+  margin-top: 20px;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #a61206;
+  transition: background-color .5s ease;
+  cursor: pointer;
+}
+
+.readmore-button:hover {
+  background-color: #f19f30;
+}
+
+/* SIDEBAR */
+.sidebar {
+    margin-top: 3px;
+}
+
+.searchform {
+  position: relative;
+}
+
+.searchform #searchsubmit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  background-color: #a61206;
+  text-indent: -9999px;
+  background-image: url(img/buscador.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: none;
+  cursor: pointer;
+}
+
+.searchform input {
+  width: 100%;
+  padding: 10px;
+}
+
+aside {
+  margin-bottom: 20px;
+  padding-left: 20px !important;
+}
+
+.widget h3 {
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.widget ul {
+  list-style: none;
+  padding-left: 25px
+}
+
+.widget ul li {
+  margin-bottom: 16px;
+}
+
+.widget ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.widget ul li a:hover {
+  color: #f19f30;
+}
+
+/* COMMENTS */
+.comments h3,
+.comment-list h3 {
+  font-weight: 700;
+  text-align: center;
+}
+
+.comments form label {
+  width: 200px;
+  text-align: left;
+  font-weight: bold;
+  padding-bottom: 10px;
+  line-height: 30px;
+}
+
+.comments form input,
+.comments form textarea {
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #8e8e8e;
+}
+
+.comments form input#wp-comment-cookies-consent {
+  width: 30px;
+}
+
+.comments form .form-submit {
+  padding-top: 10px;
+}
+
+.comments form input[type='submit'] {
+  margin: 0 auto;
+  display: block;
+  border: none;
+}
+
+.logged-in-as a {
+  color: #a61206;
+}
+
+.comments h3 > a {
+  text-decoration: none;
+  color: black;
+}
+
+.comments h3 a:hover {
+  text-decoration: underline;
+}
+
+.comments h3 small {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.comments h3 small a {
+  color: #a61206;
+  text-decoration: none;
+}
+
+.comment-list,
+.comment-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.comment-list li.comment {
+  background-color: #e1e1e1;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+}
+
+.comment-list li.comment cite {
+  color: #a61206;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.comment-list li.comment .comment-author {
+  margin-bottom: 20px;
+}
+
+.comment-list li.comment a {
+  color: #a61206;
+  text-decoration: none;
+}
+
+.comment-list li.comment ul.children li {
+  background-color: white;
+  margin-top: 20px;
+}
+
+.paginator {
+  margin-top: 20px;
+  background-color: #e1e1e1;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 20px;
+}
+
+.paginator a {
+  color: #a61206;
+  text-decoration: none;
+}
+
+.paginator a:hover {
+  text-decoration: underline;
+}
+
+.paginator .current {
+  font-weight: bold;
+  color: #555;
+}
+
 
 @media only screen and (min-width: 768px) {
   .logo {
@@ -397,6 +650,15 @@ div.speciality-text p {
   }
 
   .columns2-3 {
+    width: 66.6%;
+  }
+
+  .columns1-3 {
+    width: 33.3%;
+  }
+
+  /* COMMENTS */
+  .comments {
     width: 66.6%;
   }
 }

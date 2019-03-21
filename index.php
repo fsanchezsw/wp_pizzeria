@@ -29,7 +29,8 @@
               <div class="entry-title">
                 <?php the_title('<h2>', '</h2>'); ?>
                 <p class="author">
-                  <i class="fa fa-user" aria-hidden="true"> <?php the_author(); ?></i>
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <?php the_author(); ?>
                 </p>
               </div>
             </header>
@@ -39,7 +40,11 @@
             </div>
           </article>
         <?php endwhile; ?>
+        <div class="paginator">
+          <?php echo paginate_links(); ?>
+        </div>
       </main>
+      <?php get_sidebar(); ?>
     </div>
   </div>
 <?php get_footer(); ?>

@@ -9,6 +9,8 @@
   }
 
   add_filter( 'body_class', 'add_slug_body_class' );
+
+
   //Adición de opciones a wordpress
   function lapizzeria_setup() {
     //Añadir imagen destacada a los posts
@@ -20,6 +22,7 @@
   }
 
   add_action('after_setup_theme', 'lapizzeria_setup');
+
 
   //Creación de estilos
   function lapizzeria_styles() {
@@ -43,6 +46,7 @@
 
   add_action('wp_enqueue_scripts', 'lapizzeria_styles');
 
+
   //Creación de menús
   function lapizzeria_menus() {
     register_nav_menus([
@@ -52,6 +56,7 @@
   }
 
   add_action('init', 'lapizzeria_menus');
+
 
   //Código pegado por el pancho para poder crear custom posts
   function lapizzeria_especialidades() {
@@ -93,4 +98,19 @@
   }
 
   add_action( 'init', 'lapizzeria_especialidades' );
+
+
+  //Código para habilitar widgets
+  function lapizzeria_widgets() {
+    register_sidebar([
+      'name' => 'Blog sidebar',
+      'id' => 'blog_sidebar',
+      'before_widget' => '<div class="widget">',
+      'after_widget' => '</div>',
+      'before_title' => '<h3>',
+      'after_title' => '</h3>'
+    ]);
+  }
+
+  add_action('widgets_init', 'lapizzeria_widgets');
 ?>
