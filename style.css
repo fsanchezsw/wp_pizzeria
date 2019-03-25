@@ -385,7 +385,9 @@ div.speciality-text p {
 }
 
 .readmore-button,
-.comments form input[type='submit'] {
+.comments form input[type='submit'],
+.contact-form-button,
+.front-page-button {
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   width: auto;
@@ -395,12 +397,20 @@ div.speciality-text p {
   margin-top: 20px;
   display: inline-block;
   text-decoration: none;
-  background-color: #a61206;
   transition: background-color .5s ease;
   cursor: pointer;
+  border: none;
 }
 
-.readmore-button:hover {
+.readmore-button,
+.comments form input[type='submit'],
+.contact-form-button,
+.front-page-button:hover {
+  background-color: #a61206;
+}
+.readmore-button:hover,
+.contact-form-button:hover,
+.front-page-button {
   background-color: #f19f30;
 }
 
@@ -577,6 +587,55 @@ aside {
   color: #555;
 }
 
+/* CONTACT */
+.contact {
+  text-align: center;
+}
+
+.contact h3 {
+  font-weight: 700;
+}
+
+.contact-reservation {
+  width: 400px;
+}
+.contact-reservation .field {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.contact-reservation .field input,
+.contact-reservation .field textarea {
+  width: 100%;
+  border: 2px solid black;
+  padding: 12px 10px;
+  border-radius: 8px;
+}
+
+.contact-reservation .field textarea {
+  height: 150px;
+}
+
+.contact-reservation .field label {
+  float: left;
+  padding-bottom: 8px;
+}
+
+/* FRONT-PAGE: HERO */
+.home .hero {
+  height: 650px;
+}
+
+.home .hero h1 {
+  margin-top: 0;
+}
+
+.home .hero-text p {
+  line-height: 40px;
+  font-size: 18px;
+}
+
+
 
 @media only screen and (min-width: 768px) {
   .logo {
@@ -697,6 +756,14 @@ aside {
 
   .box p {
     margin-top: 20px;
+  }
+
+  /* CONTACT */
+  .contact {
+    background-image: url(img/contacto_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    text-align: right;
   }
 }
 

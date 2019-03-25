@@ -5,7 +5,7 @@
     <title></title>
     <?php wp_head(); ?>
   </head>
-  <body>
+  <body <?php body_class(); ?>>
     <header class="site-header">
       <div class="container">
         <div class="logo">
@@ -29,8 +29,8 @@
             ?>
           </div>
           <div class="address">
-            <p>8179 Bay Avenue Mountain View, CA 94043</p>
-            <p>Teléfono: +1-92-456-7890</p>
+            <p><?php echo esc_html(get_option('lapizzeria_address')); ?></p>
+            <p>Teléfono: <?php echo esc_html(get_option('lapizzeria_phone')); ?></p>
           </div>
         </div>
       </div>

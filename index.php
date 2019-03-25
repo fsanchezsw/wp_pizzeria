@@ -7,7 +7,7 @@
   <div class="hero" style="background-image: url(<?php echo $image[0] ?>)">
     <div class="hero-content">
       <div class="hero-text">
-        <?php the_title('<h1>', '</h1>'); ?>
+        <h1><?php echo get_the_title($blog_page); ?></h1>
       </div>
     </div>
   </div>

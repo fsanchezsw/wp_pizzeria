@@ -1,4 +1,8 @@
 <?php
+  require get_template_directory() . '/inc/database.php';
+  require get_template_directory() . '/inc/reservations.php';
+  require get_template_directory() . '/inc/options.php';
+
   //Page Slug Body Class
   function add_slug_body_class( $classes ) {
     global $post;
@@ -19,6 +23,11 @@
     //Añadir nuevo tamaño de imagen
     add_image_size('nosotros', 437, 291, true);
     add_image_size('especialidades', 768, 515, true);
+    add_image_size('especialidades_portrait', 435, 526, true);
+
+    //Modificar tamaños imagen
+    update_option('thumbnail_size_w', 253);
+    update_option('thumbnail_size_h', 164);
   }
 
   add_action('after_setup_theme', 'lapizzeria_setup');
@@ -30,17 +39,21 @@
     wp_register_style('normalize', get_template_directory_uri() . '/css/normalize.css', [], '5.0.0');
     wp_register_style('googlefonts', 'https://fonts.googleapis.com/css?family=Open+Sans|Raleway:400,700,900', ['normalize'], '1.0.0');
     wp_register_style('fontawesome', get_template_directory_uri() . '/css/font-awesome.min.css', ['normalize'], '4.7.0');
+    wp_register_style('fluidbox', get_template_directory_uri() . '/css/fluidbox.min.css', ['normalize'], '2.0.5');
     wp_register_style('style', get_template_directory_uri() . '/style.css', ['normalize'], '1.0');
     //Llamar estilos
     wp_enqueue_style('normalize');
     wp_enqueue_style('googlefonts');
     wp_enqueue_style('fontawesome');
+    wp_enqueue_style('fluidbox');
     wp_enqueue_style('style');
 
     //Registrar scripts
+    wp_register_script('fluidbox', get_template_directory_uri() . '/js/jquery.fluidbox.min.js', [], '1.0.0', true);
     wp_register_script('scripts', get_template_directory_uri() . '/js/scripts.js', [], '1.0.0', true);
     //Llamar scripts
     wp_enqueue_script('jquery');
+    wp_enqueue_script('fluidbox');
     wp_enqueue_script('scripts');
   }
 
