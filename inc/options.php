@@ -14,6 +14,11 @@
     //Registrar opciones, una por campo
     register_setting('lapizzeria_options_group', 'lapizzeria_address');
     register_setting('lapizzeria_options_group', 'lapizzeria_phone');
+
+    register_setting('lapizzeria_options_gmaps', 'lapizzeria_gmap_latitude');
+    register_setting('lapizzeria_options_gmaps', 'lapizzeria_gmap_longitude');
+    register_setting('lapizzeria_options_gmaps', 'lapizzeria_gmap_zoom');
+    register_setting('lapizzeria_options_gmaps', 'lapizzeria_gmap_apikey');
   }
 
   function lapizzeria_options() {
@@ -25,6 +30,7 @@
           settings_fields('lapizzeria_options_group');
           do_settings_sections('lapizzeria_options_group');
         ?>
+        <h2>Información de contacto</h2>
         <table class="form-table">
           <tr valign="top">
             <th scope="row">Dirección</th>
@@ -33,6 +39,30 @@
           <tr valign="top">
             <th scope="row">Teléfono</th>
             <td><input type="text" name="lapizzeria_phone" value="<?php echo esc_attr(get_option('lapizzeria_phone')); ?>"></td>
+          </tr>
+        </table>
+
+        <?php
+          settings_fields('lapizzeria_options_gmaps');
+          do_settings_sections('lapizzeria_options_gmaps');
+        ?>
+        <h2>Información de Google Maps</h2>
+        <table class="form-table">
+          <tr valign="top">
+            <th scope="row">Latitud</th>
+            <td><input type="text" name="lapizzeria_gmap_latitude" value="<?php echo esc_attr(get_option('lapizzeria_gmap_latitude')); ?>"></td>
+          </tr>
+          <tr valign="top">
+            <th scope="row">Longitud</th>
+            <td><input type="text" name="lapizzeria_gmap_longitude" value="<?php echo esc_attr(get_option('lapizzeria_gmap_longitude')); ?>"></td>
+          </tr>
+          <tr valign="top">
+            <th scope="row">Zoom</th>
+            <td><input type="number" name="lapizzeria_gmap_zoom" value="<?php echo esc_attr(get_option('lapizzeria_gmap_zoom')); ?>"></td>
+          </tr>
+          <tr valign="top">
+            <th scope="row">API Key</th>
+            <td><input type="text" name="lapizzeria_gmap_apikey" value="<?php echo esc_attr(get_option('lapizzeria_gmap_apikey')); ?>"></td>
           </tr>
         </table>
         <?php submit_button(); ?>

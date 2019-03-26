@@ -635,6 +635,102 @@ aside {
   font-size: 18px;
 }
 
+/* FRONT-PAGE: OUR SPECIALITIES */
+.speciality-content {
+  position: relative;
+  overflow: hidden;
+  display: table;
+}
+
+.speciality-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(241, 159, 48, 0.8);
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  padding: 5px;
+  transition: all .5s ease-in-out;
+  opacity: 0;
+  padding: 0 30px;
+}
+
+.speciality-info .price {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.speciality-info h3 {
+  font-size: 30px;
+  margin-top: 30px;
+  font-weight: 700;
+}
+
+.speciality-info p {
+  margin: 0 0 18px 0;
+}
+
+.speciality-content:hover .speciality-info {
+  top: 0;
+  opacity: 1;
+}
+
+/* FRONT-PAGE: INGREDIENTS */
+.ingredients {
+  background-image: url(img/bg-ingredientes.jpg);
+  margin-top: 50px;
+  padding: 80px 30px;
+  color: white;
+}
+
+.ingredients h3 {
+  line-height: 60px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.ingredients p {
+  line-height: 40px;
+  font-size: 20px;
+}
+
+.ingredients .image {
+  padding-top: 30px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.ingredients .image img {
+  width: 80%;
+}
+
+/* FRONT-PAGE: RESERVATION-LOCATION */
+.reservation-location {
+  background-image: url(img/bg-ingredientes.jpg);
+  background-repeat: round;
+  margin-top: 50px;
+}
+
+.reservation-location .form {
+  padding: 40px 0px 60px 20px;
+  color: white;
+}
+
+.reservation-location .contact-reservation {
+  width: 500px;
+}
+
+.reservation-location .contact-reservation .field input,
+.reservation-location .contact-reservation .field textarea {
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+}
+
 
 
 @media only screen and (min-width: 768px) {
@@ -720,6 +816,14 @@ aside {
   .comments {
     width: 66.6%;
   }
+
+  /* FRONT-PAGE: INGREDIENTS */
+  .ingredients .image {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0,-50%);
+  }
 }
 
 @media only screen and (min-width: 992px) {
@@ -780,5 +884,32 @@ aside {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 20px;
+  }
+
+  /* FRONT-PAGE: OUR SPECIALITIES */
+  .speciality-content {
+    overflow: visible;
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .speciality-content img {
+    width: 100%;
+  }
+
+  .speciality-info {
+    position: relative;
+    opacity: 1;
+    background-color: #f19f30;
+    padding: 30px;
+  }
+
+  /* INGREDIENTS: INGREDIENTS */
+  .ingredients {
+    text-align: center;
+  }
+
+  .ingredients .text {
+    padding-bottom: 30px;
   }
 }

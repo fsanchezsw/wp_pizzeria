@@ -49,15 +49,34 @@
     wp_enqueue_style('style');
 
     //Registrar scripts
+    $apikey = esc_html(get_option('lapizzeria_gmap_apikey'));
+    wp_register_script('maps', 'https://maps.googleapis.com/maps/api/js?key=' . $apikey . '&callback=initMap', [], '1.0.0', true);
     wp_register_script('fluidbox', get_template_directory_uri() . '/js/jquery.fluidbox.min.js', [], '1.0.0', true);
     wp_register_script('scripts', get_template_directory_uri() . '/js/scripts.js', [], '1.0.0', true);
     //Llamar scripts
     wp_enqueue_script('jquery');
     wp_enqueue_script('fluidbox');
     wp_enqueue_script('scripts');
+    wp_enqueue_script('maps');
+
+    //Pasar variables de PHP a Javascript
+    wp_localize_script( 'scripts', 'options', [
+      'latitude' => get_option('lapizzeria_gmap_latitude'),
+      'longitude' => get_option('lapizzeria_gmap_longitude'),
+      'zoom' => get_option('lapizzeria_gmap_zoom')
+    ]);
   }
 
   add_action('wp_enqueue_scripts', 'lapizzeria_styles');
+
+
+  //Agregar async y defer para poder cargar el script de Google Maps
+  function add_async_defer($tag, $handle) {
+    if('maps' !== $handle) return $tag;
+    return str_replace(' src', ' async="async" defer="defer" src', $tag);
+  }
+
+  add_filter('script_loader_tag', 'add_async_defer', 10, 2);
 
 
   //Creación de menús
@@ -126,4 +145,66 @@
   }
 
   add_action('widgets_init', 'lapizzeria_widgets');
+
+
+  /**
+   * Plugin Name: Get Post Gallery Polyfill
+   * Plugin URI: https://prothemedesign.com
+   * Description: Make Get_Post_Gallery work for Gutenberg powered sites.
+   * Author: Ben Gillbanks
+   * Version: 1.0
+   * Author URI: https://prothemedesign.com
+   *
+   * @package ptd
+   */
+
+  /**
+   * A get_post_gallery() polyfill for Gutenberg
+   *
+   * @param string $gallery The current gallery html that may have already been found (through shortcodes).
+   * @param int $post The post id.
+   * @return string The gallery html.
+   */
+  function bm_get_post_gallery( $gallery, $post ) {
+
+  	// Already found a gallery so lets quit.
+  	if ( $gallery ) {
+  		return $gallery;
+  	}
+
+  	// Check the post exists.
+  	$post = get_post( $post );
+  	if ( ! $post ) {
+  		return $gallery;
+  	}
+
+  	// Not using Gutenberg so let's quit.
+  	if ( ! function_exists( 'has_blocks' ) ) {
+  		return $gallery;
+  	}
+
+  	// Not using blocks so let's quit.
+  	if ( ! has_blocks( $post->post_content ) ) {
+  		return $gallery;
+  	}
+
+  	/**
+  	 * Search for gallery blocks and then, if found, return the html from the
+  	 * first gallery block.
+  	 *
+  	 * Thanks to Gabor for help with the regex:
+  	 * https://twitter.com/javorszky/status/1043785500564381696.
+  	 */
+  	$pattern = "/<!--\ wp:gallery.*-->([\s\S]*?)<!--\ \/wp:gallery -->/i";
+  	preg_match_all( $pattern, $post->post_content, $the_galleries );
+  	// Check a gallery was found and if so change the gallery html.
+  	if ( ! empty( $the_galleries[1] ) ) {
+  		$gallery = reset( $the_galleries[1] );
+  	}
+
+  	return $gallery;
+
+  }
+
+  add_filter( 'get_post_gallery', 'bm_get_post_gallery', 10, 2 );
 ?>

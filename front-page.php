@@ -13,7 +13,9 @@
   <?php endwhile; ?>
   <div class="principal container">
     <main class="grid-container">
-      <h2 style="color: #a61206;">Nuestra especialidades</h2>
+      <h2 style="color: #a61206; text-align: center;">
+        Nuestra especialidades
+      </h2>
       <?php
         $args = [
           'posts_per_page' => 3,
@@ -37,4 +39,41 @@
       <?php endwhile; wp_reset_postdata(); ?>
     </main>
   </div>
+  <section class="ingredients">
+    <div class="container">
+      <div style="position: relative;" class="grid-container">
+        <?php while(have_posts()): the_post(); ?>
+          <div class="columns1-2 text">
+            <?php the_field('contenido'); ?>
+            <?php $url = get_page_by_title('Sobre nosotros'); ?>
+            <a class="readmore-button" href="<?php echo get_permalink($url->ID); ?>">Leer más</a>
+          </div>
+          <div class="columns1-2 image">
+            <img src="<?php the_field('imagen'); ?>" alt="ingredients">
+          </div>
+        <?php endwhile; ?>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top: 20px;" class="container">
+    <div style="text-align: center; display: inline-block">
+      <h2 style="color: #a61206; text-align: center;">
+        Galería de imágenes
+      </h2>
+      <?php
+        $url = get_page_by_title('Galería');
+        echo get_post_gallery($url->ID);
+      ?>
+    </div>
+  </section>
+  <section class="reservation-location">
+    <div class="grid-container">
+      <div class="columns1-2 map">
+        <div id="map" style="height: 400px;"></div>
+      </div>
+      <div class="columns1-2 form">
+        <?php get_template_part('templates/reservation', 'form'); ?>
+      </div>
+    </div>
+  </section>
 <?php get_footer(); ?>
