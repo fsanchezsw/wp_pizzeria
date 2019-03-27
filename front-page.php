@@ -25,7 +25,7 @@
         $specialities = new WP_Query($args);
         while($specialities->have_posts()): $specialities->the_post();
       ?>
-          <div class="speciality columns1-3">
+          <div class="speciality columns-1-3">
             <div class="speciality-content">
               <?php the_post_thumbnail('especialidades_portrait'); ?>
               <div class="speciality-info">
@@ -43,12 +43,12 @@
     <div class="container">
       <div style="position: relative;" class="grid-container">
         <?php while(have_posts()): the_post(); ?>
-          <div class="columns1-2 text">
+          <div class="columns-1-2 text">
             <?php the_field('contenido'); ?>
             <?php $url = get_page_by_title('Sobre nosotros'); ?>
             <a class="readmore-button" href="<?php echo get_permalink($url->ID); ?>">Leer más</a>
           </div>
-          <div class="columns1-2 image">
+          <div class="columns-1-2 image">
             <img src="<?php the_field('imagen'); ?>" alt="ingredients">
           </div>
         <?php endwhile; ?>
@@ -68,10 +68,10 @@
   </section>
   <section class="reservation-location">
     <div class="grid-container">
-      <div class="columns1-2 map">
+      <div class="columns-1-2 map">
         <div id="map" style="height: 400px;"></div>
       </div>
-      <div class="columns1-2 form">
+      <div class="columns-1-2 form">
         <?php get_template_part('templates/reservation', 'form'); ?>
       </div>
     </div>

@@ -13,7 +13,7 @@
   </div>
   <div class="principal container">
     <div class="grid-container">
-      <main class="columns2-3 page-content">
+      <main class="columns-2-3 page-content">
         <?php while(have_posts()): the_post(); ?>
           <article class="blog-entry">
             <a href="<?php the_permalink(); ?>">

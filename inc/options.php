@@ -84,6 +84,7 @@
             <th class="manage-column">Correo</th>
             <th class="manage-column">Teléfono</th>
             <th class="manage-column">Mensaje</th>
+            <th class="manage-column">Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -100,6 +101,9 @@
                 <td><?php echo $register['email'] ?></td>
                 <td><?php echo $register['phone'] ?></td>
                 <td><?php echo $register['message'] ?></td>
+                <td>
+                  <a class="delete_register" href="#" data-reservations=<?php echo $register['id']; ?>>Eliminar</a>
+                </td>
               </tr>
             <?php } ?>
         </tbody>

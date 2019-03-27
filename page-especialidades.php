@@ -33,7 +33,7 @@ get_header(); ?>
         $pizzas = new WP_Query($args);
         while($pizzas->have_posts()): $pizzas->the_post();
       ?>
-      <div class="columns1-2">
+      <div class="columns-1-2">
         <?php the_post_thumbnail('especialidades'); ?>
         <div class="speciality-text">
           <h4><?php the_title(); ?> <span><?php the_field('precio'); ?>€</span></h4>
@@ -57,7 +57,7 @@ get_header(); ?>
         $others = new WP_Query($args);
         while($others->have_posts()): $others->the_post();
       ?>
-      <div class="columns1-2">
+      <div class="columns-1-2">
         <?php the_post_thumbnail('especialidades'); ?>
         <div class="speciality-text">
           <h4><?php the_title(); ?> <span><?php the_field('precio'); ?>€</span></h4>

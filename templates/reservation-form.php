@@ -20,5 +20,6 @@
     <label for="message">Mensaje</label>
     <textarea name="message"></textarea>
   </div>
+  <div class="g-recaptcha" data-sitekey="6LelT5oUAAAAALa40Q1HnKzHqbLVH9Z6nWxIuzS8"></div>
   <input type="submit" name="Enviar" class="contact-form-button">
 </form>

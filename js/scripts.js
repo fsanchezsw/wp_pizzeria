@@ -1,7 +1,6 @@
 //Inicializar Google Maps
 var map;
 function initMap() {
-  console.log(options);
   var coords = { lat: parseFloat(options.latitude), lng: parseFloat(options.longitude) };
   map = new google.maps.Map(document.getElementById('map'), {
     center: coords,

@@ -3,6 +3,15 @@
   require get_template_directory() . '/inc/reservations.php';
   require get_template_directory() . '/inc/options.php';
 
+  //Adding ReCaptcha
+  function lapizzeria_add_recaptcha() { ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <?php
+  }
+
+  add_action('wp_head', 'lapizzeria_add_recaptcha');
+
+
   //Page Slug Body Class
   function add_slug_body_class( $classes ) {
     global $post;
@@ -19,6 +28,8 @@
   function lapizzeria_setup() {
     //Añadir imagen destacada a los posts
     add_theme_support('post-thumbnails');
+    //Añadir titulo a la pestaña del navegador
+    add_theme_support('title-tag');
 
     //Añadir nuevo tamaño de imagen
     add_image_size('nosotros', 437, 291, true);
@@ -33,6 +44,18 @@
   add_action('after_setup_theme', 'lapizzeria_setup');
 
 
+  //Poder cambiar logo desde el admin
+  function lapizzeria_custom_logo() {
+    $logo = [
+      'height' => 220,
+      'width'=> 280
+    ];
+    add_theme_support('custom-logo', $logo);
+  }
+
+  add_action('after_setup_theme', 'lapizzeria_custom_logo');
+
+
   //Creación de estilos
   function lapizzeria_styles() {
     //Registrar estilos
@@ -40,22 +63,30 @@
     wp_register_style('googlefonts', 'https://fonts.googleapis.com/css?family=Open+Sans|Raleway:400,700,900', ['normalize'], '1.0.0');
     wp_register_style('fontawesome', get_template_directory_uri() . '/css/font-awesome.min.css', ['normalize'], '4.7.0');
     wp_register_style('fluidbox', get_template_directory_uri() . '/css/fluidbox.min.css', ['normalize'], '2.0.5');
+    wp_register_style('datetime-local', get_template_directory_uri() . '/css/datetime-local-polyfill.css', ['normalize'], '2.0.5');
     wp_register_style('style', get_template_directory_uri() . '/style.css', ['normalize'], '1.0');
     //Llamar estilos
     wp_enqueue_style('normalize');
     wp_enqueue_style('googlefonts');
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('fluidbox');
+    wp_enqueue_style('datetime-local');
     wp_enqueue_style('style');
 
     //Registrar scripts
     $apikey = esc_html(get_option('lapizzeria_gmap_apikey'));
     wp_register_script('maps', 'https://maps.googleapis.com/maps/api/js?key=' . $apikey . '&callback=initMap', [], '1.0.0', true);
     wp_register_script('fluidbox', get_template_directory_uri() . '/js/jquery.fluidbox.min.js', [], '1.0.0', true);
+    wp_register_script('datetime-local-polyfill', get_template_directory_uri() . '/js/datetime-local-polyfill.min.js', [], '1.0.0', true);
+    wp_register_script('modernizr', 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js', [], '2.8.3', true);
     wp_register_script('scripts', get_template_directory_uri() . '/js/scripts.js', [], '1.0.0', true);
     //Llamar scripts
     wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery-ui-core');
+    wp_enqueue_script('jquery-ui-datepicker');
     wp_enqueue_script('fluidbox');
+    wp_enqueue_script('datetime-local-polyfill');
+    wp_enqueue_script('modernizr');
     wp_enqueue_script('scripts');
     wp_enqueue_script('maps');
 
@@ -68,6 +99,17 @@
   }
 
   add_action('wp_enqueue_scripts', 'lapizzeria_styles');
+
+
+  function lapizzeria_admin_scripts() {
+    wp_enqueue_style('sweetalert', get_template_directory_uri() . '/css/sweetalert2.min.css');
+    wp_enqueue_script('sweetalert', get_template_directory_uri() . '/js/sweetalert2.min.js', ['jquery'], '1.0.0', true);
+    wp_enqueue_script('adminjs', get_template_directory_uri() . '/js/admin-ajax.js', ['jquery'], '1.0', true);
+    //Pasar la URL de WP Ajax al adminjs
+    wp_localize_script('adminjs', 'url_delete', ['ajaxurl' => admin_url('admin-ajax.php')]);
+  }
+
+  add_action('admin_enqueue_scripts', 'lapizzeria_admin_scripts');
 
 
   //Agregar async y defer para poder cargar el script de Google Maps
@@ -207,4 +249,277 @@
   }
 
   add_filter( 'get_post_gallery', 'bm_get_post_gallery', 10, 2 );
+
+
+  //Export Advanced Custom Fields al theme para no tener la dependencia del plugin
+  define('ACF_LITE', true);
+  include_once('advanced-custom-fields/acf.php');
+  if( function_exists('acf_add_local_field_group') ):
+
+    acf_add_local_field_group(array(
+    	'key' => 'group_5c921a5fda6db',
+    	'title' => 'Especialidades',
+    	'fields' => array(
+    		array(
+    			'key' => 'field_5c921a652166c',
+    			'label' => 'Precio',
+    			'name' => 'precio',
+    			'type' => 'number',
+    			'instructions' => 'Añade el precio al plato',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'placeholder' => '',
+    			'prepend' => '',
+    			'append' => '',
+    			'min' => '',
+    			'max' => '',
+    			'step' => '',
+    		),
+    	),
+    	'location' => array(
+    		array(
+    			array(
+    				'param' => 'post_type',
+    				'operator' => '==',
+    				'value' => 'especialidades',
+    			),
+    		),
+    	),
+    	'menu_order' => 0,
+    	'position' => 'normal',
+    	'style' => 'default',
+    	'label_placement' => 'top',
+    	'instruction_placement' => 'label',
+    	'hide_on_screen' => '',
+    	'active' => true,
+    	'description' => '',
+    ));
+
+    acf_add_local_field_group(array(
+    	'key' => 'group_5c99e0d77e335',
+    	'title' => 'Inicio',
+    	'fields' => array(
+    		array(
+    			'key' => 'field_5c99e0fa9f189',
+    			'label' => 'Contenido',
+    			'name' => 'contenido',
+    			'type' => 'wysiwyg',
+    			'instructions' => '',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'tabs' => 'all',
+    			'toolbar' => 'full',
+    			'media_upload' => 1,
+    			'delay' => 0,
+    		),
+    		array(
+    			'key' => 'field_5c99e1159f18a',
+    			'label' => 'Imagen',
+    			'name' => 'imagen',
+    			'type' => 'image',
+    			'instructions' => '',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'return_format' => 'url',
+    			'preview_size' => 'thumbnail',
+    			'library' => 'all',
+    			'min_width' => '',
+    			'min_height' => '',
+    			'min_size' => '',
+    			'max_width' => '',
+    			'max_height' => '',
+    			'max_size' => '',
+    			'mime_types' => '',
+    		),
+    	),
+    	'location' => array(
+    		array(
+    			array(
+    				'param' => 'page',
+    				'operator' => '==',
+    				'value' => '7',
+    			),
+    		),
+    	),
+    	'menu_order' => 0,
+    	'position' => 'normal',
+    	'style' => 'default',
+    	'label_placement' => 'top',
+    	'instruction_placement' => 'label',
+    	'hide_on_screen' => '',
+    	'active' => true,
+    	'description' => '',
+    ));
+
+    acf_add_local_field_group(array(
+    	'key' => 'group_5c90dbe0bddad',
+    	'title' => 'Sobre nosotros',
+    	'fields' => array(
+    		array(
+    			'key' => 'field_5c90dcadf5ad6',
+    			'label' => 'Imagen 1',
+    			'name' => 'imagen_1',
+    			'type' => 'image',
+    			'instructions' => 'Sube una imagen',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'return_format' => 'id',
+    			'preview_size' => 'thumbnail',
+    			'library' => 'all',
+    			'min_width' => '',
+    			'min_height' => '',
+    			'min_size' => '',
+    			'max_width' => '',
+    			'max_height' => '',
+    			'max_size' => '',
+    			'mime_types' => '',
+    		),
+    		array(
+    			'key' => 'field_5c90dd42f5adb',
+    			'label' => 'Descripcion 1',
+    			'name' => 'descripcion_1',
+    			'type' => 'wysiwyg',
+    			'instructions' => 'Agrega aquí la descripción',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'tabs' => 'all',
+    			'toolbar' => 'full',
+    			'media_upload' => 1,
+    			'delay' => 0,
+    		),
+    		array(
+    			'key' => 'field_5c90dd18f5ad9',
+    			'label' => 'Imagen 2',
+    			'name' => 'imagen_2',
+    			'type' => 'image',
+    			'instructions' => 'Sube una imagen',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'return_format' => 'id',
+    			'preview_size' => 'thumbnail',
+    			'library' => 'all',
+    			'min_width' => '',
+    			'min_height' => '',
+    			'min_size' => '',
+    			'max_width' => '',
+    			'max_height' => '',
+    			'max_size' => '',
+    			'mime_types' => '',
+    		),
+    		array(
+    			'key' => 'field_5c90dd65f5adc',
+    			'label' => 'Descripcion 2',
+    			'name' => 'descripcion_2',
+    			'type' => 'wysiwyg',
+    			'instructions' => 'Agrega aquí la descripción',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'tabs' => 'all',
+    			'toolbar' => 'full',
+    			'media_upload' => 1,
+    			'delay' => 0,
+    		),
+    		array(
+    			'key' => 'field_5c90dd19f5ada',
+    			'label' => 'Imagen 3',
+    			'name' => 'imagen_3',
+    			'type' => 'image',
+    			'instructions' => 'Sube una imagen',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'return_format' => 'id',
+    			'preview_size' => 'thumbnail',
+    			'library' => 'all',
+    			'min_width' => '',
+    			'min_height' => '',
+    			'min_size' => '',
+    			'max_width' => '',
+    			'max_height' => '',
+    			'max_size' => '',
+    			'mime_types' => '',
+    		),
+    		array(
+    			'key' => 'field_5c90dd66f5add',
+    			'label' => 'Descripcion 3',
+    			'name' => 'descripcion_3',
+    			'type' => 'wysiwyg',
+    			'instructions' => 'Agrega aquí la descripción',
+    			'required' => 0,
+    			'conditional_logic' => 0,
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'tabs' => 'all',
+    			'toolbar' => 'full',
+    			'media_upload' => 1,
+    			'delay' => 0,
+    		),
+    	),
+    	'location' => array(
+    		array(
+    			array(
+    				'param' => 'page',
+    				'operator' => '==',
+    				'value' => '11',
+    			),
+    		),
+    	),
+    	'menu_order' => 0,
+    	'position' => 'normal',
+    	'style' => 'default',
+    	'label_placement' => 'top',
+    	'instruction_placement' => 'label',
+    	'hide_on_screen' => '',
+    	'active' => true,
+    	'description' => '',
+    ));
+
+  endif;
 ?>
