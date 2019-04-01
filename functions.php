@@ -101,6 +101,7 @@
   add_action('wp_enqueue_scripts', 'lapizzeria_styles');
 
 
+  //Creación de scripts para el admin
   function lapizzeria_admin_scripts() {
     wp_enqueue_style('sweetalert', get_template_directory_uri() . '/css/sweetalert2.min.css');
     wp_enqueue_script('sweetalert', get_template_directory_uri() . '/js/sweetalert2.min.js', ['jquery'], '1.0.0', true);
@@ -110,6 +111,25 @@
   }
 
   add_action('admin_enqueue_scripts', 'lapizzeria_admin_scripts');
+
+
+  //Creación de los estilos y scripts para el login del admin
+  function lapizzeria_login_admin_scripts() {
+    //Styles para el login del admin
+    wp_enqueue_style('normalize', get_template_directory_uri() . '/css/normalize.css', [], '5.0.0');
+    wp_enqueue_style('vegascss', get_template_directory_uri() . '/css/vegas.min.css', ['normalize'], '2.4.4');
+    wp_enqueue_style('logincss', get_template_directory_uri() . '/css/login.css', ['normalize'], '1.0.0');
+    //Scripts para el login del admin
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('vegasjs', get_template_directory_uri() . '/js/vegas.min.js', ['jquery'], '2.4.4', true);
+    wp_enqueue_script('loginjs', get_template_directory_uri() . '/js/login-scripts.js', ['jquery'], '1.0.0', true);
+
+    wp_localize_script('loginjs', 'login_images', [
+      'path' => get_template_directory_uri()
+    ]);
+  }
+
+  add_action('login_enqueue_scripts', 'lapizzeria_login_admin_scripts', 10);
 
 
   //Agregar async y defer para poder cargar el script de Google Maps
@@ -187,6 +207,7 @@
   }
 
   add_action('widgets_init', 'lapizzeria_widgets');
+
 
 
   /**
