@@ -31,7 +31,10 @@ body.login div#login h1 {
 
   body.login div#login h1 a {
     background-position: left top;
-    margin-left: 40px !important;
+    margin-left: 30px !important;
+    height: 150px !important;
+    width: 200px  !important;
+    background-size: 100% !important;
   }
 }
 body.login div#login h1 a {
@@ -125,5 +128,5 @@ float: right;
 @media screen and (min-width:768px) {
 body.login div#login form#loginform {
 float: right;
-margin-top: -183px;
+margin-top: -210px;
 }
